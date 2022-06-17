@@ -1,6 +1,12 @@
 # [[file:checker.org::*questions][questions:1]]
 # !/usr/bin/env python3
 
+"""
+Created by: Kevin Tudor
+Date: 06/17/2022
+Assignment #1
+"""
+
 from easyAI import TwoPlayerGame, Human_Player, AI_Player, Negamax
 from easyAI import solve_with_iterative_deepening
 import numpy as np
@@ -178,8 +184,8 @@ class Checker(TwoPlayerGame):
         ------
         """
         
-        self.players[self.current_player-1].pos = self.get_piece_pos_from_table(pos)
-        self.board = pos
+        self.players[self.current_player-1].pos = self.get_piece_pos_from_table(pos) #update player pieces
+        self.board = pos #update board
 
     def lose(self):
         """
@@ -208,21 +214,19 @@ class Checker(TwoPlayerGame):
     def is_over(self):
         """
         game is over immediately when one player get one of its piece into opponent's territory.
-        
-        #if black turn and white has no possible move Black wins
-        if self.possible_moves_on_white_turn == []:
-            self.won = "Black"
-        #if white turn and black has no possible move Black wins
-        elif self.possible_moves_on_black_turn == []:
-            self.won = "White"
-            
         """
         
-        if self.lose() == 1 or len(self.white_pieces) == 0:
+        #if a black position in w territory or white has 0 pieces left or white has no possible moves left
+        if self.lose() == 1 \
+            or len(self.white_pieces) == 0 \
+                or self.possible_moves_on_white_turn == []:
             print("\nBlack Wins!")
             return True
-        
-        if self.lose() == 2 or len(self.black_pieces) == 0:
+
+        #if a white position in b territory or black has 0 pieces left or black has no possible moves left
+        if self.lose() == 2 \
+            or len(self.black_pieces) == 0 \
+                or self.possible_moves_on_black_turn == []:
             print("\nWhite Wins!")
             return True
         
