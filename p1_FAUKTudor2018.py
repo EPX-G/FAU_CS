@@ -215,7 +215,7 @@ class Checker(TwoPlayerGame):
         """
         game is over immediately when one player get one of its piece into opponent's territory.
         """
-        
+
         #if a black position in w territory or white has 0 pieces left or white has no possible moves left
         if self.lose() == 1 \
             or len(self.white_pieces) == 0 \
@@ -251,7 +251,7 @@ class Checker(TwoPlayerGame):
        win = 0
        lose = -100
        """
-       if self.lose():
+       if self.lose() == 1 or self.lose() == 2:
            return -100
        else:
            return 0
